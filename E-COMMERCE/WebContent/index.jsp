@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
+<<<<<<< Updated upstream
 	pageEncoding="EUC-KR"%>
+=======
+<<<<<<< Updated upstream
+    pageEncoding="EUC-KR"%>
+=======
+	pageEncoding="EUC-KR"%>
+<%@ page import="java.sql.*"%>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +28,12 @@ td {
 </style>
 </head>
 <body>
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
 	<%
 		String str1 = "I'm a String.";
 	%>
@@ -39,11 +54,16 @@ td {
 	%>
 	<br>
 	<%
+<<<<<<< Updated upstream
 		int i = 0, tmp = 1, preTmp = 1;
+=======
+		int sum = 0, tmp = 1, preTmp = 1;
+>>>>>>> Stashed changes
 	%><%=preTmp%>
 	<%=tmp%>
 	<%
 		while (true) {
+<<<<<<< Updated upstream
 		i = tmp + preTmp;
 	%>
 	<%=i%>
@@ -51,6 +71,15 @@ td {
 		preTmp = tmp;
 	tmp = i;
 	if (i > 100)
+=======
+		sum = tmp + preTmp;
+	%>
+	<%=sum%>
+	<%
+		preTmp = tmp;
+	tmp = sum;
+	if (sum > 100)
+>>>>>>> Stashed changes
 		break;
 	}
 	%>
@@ -142,5 +171,246 @@ td {
 			}
 		%>
 	</table>
+<<<<<<< Updated upstream
+=======
+	<table border = "1">
+	<tr>
+		<td>ID</td>
+		<td>카테고리명</td>
+		<td>이름</td>
+		<td>가격</td>
+		<td>재고</td>
+		<td>설명</td>
+		<td>원산지</td>
+	</tr>
+<%
+try
+{  
+	//step1 load the driver class  
+	Class.forName("oracle.jdbc.driver.OracleDriver");  
+	  
+	//step2 create  the connection object  
+	Connection con=DriverManager.getConnection(  
+	"jdbc:oracle:thin:@localhost:1521:xe","SMC_USER","SMC_USER");  
+	  
+	//step3 create the statement object  
+	Statement stmt=con.createStatement();  
+	  
+	//step4 execute query  
+	String query = "SELECT " +
+					"PRODUCT.ID, PRODUCT.CATEGORY_ID, CATEGORY.NAME AS CATEGORY_NAME, PRODUCT.NAME AS PRODUCT_NAME, PRODUCT.PRICE, PRODUCT.STOCK, PRODUCT.DESCRIPTION, PRODUCT.ORIGIN " +
+					"FROM " +
+					"PRODUCT, CATEGORY "+
+					"WHERE "+
+					"PRODUCT.ID=CATEGORY.ID";
+	
+	
+	ResultSet rs=stmt.executeQuery(query);  
+	while(rs.next()) {
+		%><tr><%
+		
+		%><td><%=rs.getInt("ID")%></td><%
+		%><td><%=rs.getString("CATEGORY_NAME")%></td><%
+		%><td><%=rs.getString("PRODUCT_NAME")%></td><%
+		%><td><%=rs.getInt("PRICE")%></td><%
+		%><td><%=rs.getInt("STOCK")%></td><%
+		%><td><%=rs.getString("DESCRIPTION")%></td><%
+		%><td><%=rs.getString("ORIGIN")%></td><%
+														
+		
+		%><tr><%
+	}
+	
+	  
+	//step5 close the connection object  
+	con.close();  
+	  
+}
+catch(Exception e)
+{ 
+	System.out.println(e);
+}  
+%>
+</table>
+<%-- <table>
+<tr>
+<% int first_num=0,second_num=1;
+	for(int i7=1; i7<=33; i7++){%>
+		<td><%=second_num%></td>
+		<%
+		int temp = first_num+second_num;
+		first_num=second_num;
+		second_num=tmp;
+		
+		if(i7%3==0){
+			%></tr><tr><%
+		}
+	}
+%>
+</tr>
+</table> --%>
+<table border = "1">
+<tr>
+<%
+    int first_number = 0;
+    int second_number = 1;
+
+    for (int i = 1; i <= 33; i++) {
+        %> <td><%=second_number%></td> <%
+        int temp_number = first_number + second_number;
+        first_number = second_number;
+        second_number = temp_number;
+
+        if (i % 3 == 0) {
+            %></tr><tr> <%
+        }
+    }
+%>
+</tr>
+</table>
+<table border = "1">
+	<tr>
+		<td>ID</td>
+		<td>PASSWORD</td>
+		<td>NAME</td>
+		<td>EMAIL</td>
+		<td>PHONE</td>
+		<td>ADDRESS</td>
+		<td>AGE</td>
+	</tr>
+<%
+try
+{  
+	//step1 load the driver class  
+	Class.forName("oracle.jdbc.driver.OracleDriver");  
+	  
+	//step2 create  the connection object  
+	Connection con=DriverManager.getConnection(  
+	"jdbc:oracle:thin:@localhost:1521:xe","SMC_USER","SMC_USER");  
+	  
+	//step3 create the statement object  
+	Statement stmt=con.createStatement();  
+	  
+	//step4 execute query  
+	String query = "SELECT "+
+					"* "+
+					"FROM MEMBER ";
+	
+	
+	ResultSet rs=stmt.executeQuery(query);  
+	while(rs.next()) {
+		%><tr><%
+		
+		%><td><%=rs.getInt("ID")%></td><%
+		%><td><%=rs.getString("PASSWORD")%></td><%
+		%><td><%=rs.getString("NAME")%></td><%
+		%><td><%=rs.getString("EMAIL")%></td><%
+		%><td><%=rs.getString("PHONE")%></td><%
+		%><td><%=rs.getString("ADDRESS")%></td><%
+		%><td><%=rs.getInt("AGE")%></td><%
+		
+		%><tr><%
+	}
+	
+	  
+	//step5 close the connection object  
+	con.close();  
+	  
+}
+catch(Exception e)
+{ 
+	System.out.println(e);
+}  
+%>
+</table>
+<table border = "1">
+	<tr>
+		<td>ID</td>
+		<td>가격</td>
+		<td>주문량</td>
+	</tr>
+<%
+try
+{  
+	//step1 load the driver class  
+	Class.forName("oracle.jdbc.driver.OracleDriver");  
+	  
+	//step2 create  the connection object  
+	Connection con=DriverManager.getConnection(  
+	"jdbc:oracle:thin:@localhost:1521:xe","SMC_USER","SMC_USER");  
+	  
+	//step3 create the statement object  
+	Statement stmt=con.createStatement();  
+	  
+	//step4 execute query  
+	String query = "SELECT "+
+	"PRODUCT.ID, PRODUCT.PRICE, PAYMENT_HISTORY.ORDER_COUNT "+
+	"FROM PAYMENT_HISTORY, PRODUCT "+
+	"WHERE "+
+	"PRODUCT.ID = PAYMENT_HISTORY.PRODUCT_ID"; 
+	
+	ResultSet rs=stmt.executeQuery(query);  
+	while(rs.next()) {
+		%><tr><%
+		
+		%><td><%=rs.getInt("ID")%></td><%
+		%><td><%=rs.getInt("PRICE")%></td><%
+		%><td><%=rs.getString("ORDER_COUNT")%></td><%
+														
+		
+		%><tr><%
+	}
+	
+	  
+	//step5 close the connection object  
+	con.close();  
+	  
+}
+catch(Exception e)
+{ 
+	System.out.println(e);
+}  
+%>
+</table>
+<%
+try
+{  
+	//step1 load the driver class  
+	Class.forName("oracle.jdbc.driver.OracleDriver");  
+	  
+	//step2 create  the connection object  
+	Connection con=DriverManager.getConnection(  
+	"jdbc:oracle:thin:@localhost:1521:xe","SMC_USER","SMC_USER");  
+	  
+	//step3 create the statement object  
+	Statement stmt=con.createStatement();  
+	  
+	//step4 execute query  
+	String query = 
+	"UPDATE "+"payment_history "+
+	"SET "+
+	"order_price = order_count *"+ 
+	"("+" SELECT "+
+	"product.price "+
+	"FROM "+
+	"product "+
+	"WHERE "+
+	"payment_history.product_id = product.id "+
+	")";; 
+	
+	ResultSet rs=stmt.executeQuery(query);  
+	while(rs.next())
+	
+	//step5 close the connection object  
+	con.close();  
+	  
+}
+catch(Exception e)
+{ 
+	System.out.println(e);
+}  
+%>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 </body>
 </html>
