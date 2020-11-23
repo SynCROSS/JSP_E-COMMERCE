@@ -1,36 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+	pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>parameter example</title>
 </head>
 <body>
 	<%
-	String price1 = request.getParameter("price1");
+		String price1 = request.getParameter("price1");
 	String price2 = request.getParameter("price2");
 	String stock1 = request.getParameter("stock1");
 	String stock2 = request.getParameter("stock2");
 	%>
 	<p>Enter the Price</p>
-	<input type="text" id="price1" placeholder="¿ÃªÛ">
-	<input type="text" id="price2" placeholder="¿Ã«œ">
+	<input type="text" id="price1" placeholder="Ïù¥ÏÉÅ">
+	<input type="text" id="price2" placeholder="Ïù¥Ìïò">
 	<div>
-		¿ÃªÛ:
-		<%=price1 != null ? price1 : "none"%><br> 
-		¿Ã«œ:
-		<%=price2 != null ? price2 : "none"%><br>
+		Ïù¥ÏÉÅ:
+		<%=price1 != null && price1.length() != 0 ? price1 : "none"%><br> Ïù¥Ìïò:
+		<%=price2 != null && price2.length() != 0 ? price2 : "none"%><br>
 	</div>
 	<p>Enter the Stock</p>
-	<input type="text" id="stock1" placeholder="¿ÃªÛ">
-	<input type="text" id="stock1" placeholder="¿Ã«œ">
+	<input type="text" id="stock1" placeholder="Ïù¥ÏÉÅ">
+	<input type="text" id="stock2" placeholder="Ïù¥Ìïò">
 	<div>
-		¿ÃªÛ:
-		<%=stock1 != null ? stock1 : "none"%><br> 
-		¿Ã«œ:
-		<%=stock2 != null ? stock2 : "none"%><br>
+		Ïù¥ÏÉÅ:
+		<%=stock1 != null && stock1.length() != 0 ? stock1 : "none"%><br> Ïù¥Ìïò:
+		<%=stock2 != null && stock2.length() != 0 ? stock2 : "none"%><br>
 	</div>
 	<input type="button" onclick="click_search()" value="submit">
 	<table border="1">
@@ -46,53 +44,58 @@
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SMC_USER", "SMC_USER");
 			Statement stmt = con.createStatement();
-			String query = "SELECT * " + " FROM PRODUCT ";
+			String query = "SELECT " + " NAME, PRICE, STOCK, " + " DESCRIPTION, ORIGIN " + " FROM " + " PRODUCT " + " WHERE "
+			+ " 1 = 1";
+
+			/* if (price1 != null) {
+				if (stock1 != null)
+			query += "WHERE PRODUCT.PRICE <=";
+				else if (stock2 != null) {
+			query += "WHERE PRODUCT.PRICE ";
+				}
+			}
 			
-			if (price1==null) {
-				if (stock1==null) query += "WHERE PRODUCT.PRICE ";
-				else if (stock2==null) {
-				  query += "WHERE PRODUCT.PRICE ";
-			 	} else if (stock1!=null && stock2!=null) {
-				  query += "WHERE PRODUCT.PRICE ";
-				} else query += "WHERE PRODUCT.PRICE ";
+			if (price2 != null) {
+				if (stock1 != null)
+			query += "WHERE PRODUCT.PRICE ";
+				else if (stock2 != null) {
+			query += "WHERE PRODUCT.PRICE ";
+				}
+			} */
+
+			if (price1 != null && price1.length() != 0) {
+				query += " AND PRODUCT.PRICE >= " + price1 + " ";
+			}
+			if (price2 != null && price2.length() != 0) {
+				query += " AND PRODUCT.PRICE <= " + price2 + " ";
+			}
+			if (stock1 != null && stock1.length() != 0) {
+				query += " AND PRODUCT.STOCK >= " + stock1 + " ";
+			}
+			if (stock2 != null && stock2.length() != 0) {
+				query += " AND PRODUCT.STOCK >= " + stock2 + " ";
 			}
 
-			if (price2==null) {
-				if (stock1==null) query += "WHERE PRODUCT.PRICE ";
-				else if (stock2==null) {
-				  query += "WHERE PRODUCT.PRICE ";
-				} else if (stock1!=null && stock2!=null) {
-				  query += "WHERE PRODUCT.PRICE ";
-				} else query += "WHERE PRODUCT.PRICE ";
-			}
-			if (price1==null && price2==null && stock1==null && stock2==null) query += "WHERE PRODUCT.PRICE ";
-			else query += "WHERE PRODUCT.PRICE >= "+price1+"AND PRODUCT.PRICE <= "+price2+"AND PRODUCT.STOCK >= "+stock1+"AND PRODUCT.STOCK <= ";
+			System.out.println(query);
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 		%><tr>
 			<%
 				
-			%><td><%=rs.getString("PHONE")%></td>
-			<%
-				
-			%><td><%=rs.getString("EMAIL")%></td>
-			<%
-				
 			%><td><%=rs.getString("NAME")%></td>
 			<%
 				
-			%><td><%=rs.getInt("ORDER_PRICE")%></td>
+			%><td><%=rs.getInt("PRICE")%></td>
 			<%
 				
-			%><td><%=rs.getInt("PRODUCT_ID")%></td>
+			%><td><%=rs.getInt("STOCK")%></td>
 			<%
 				
-			%><td><%=rs.getInt("ORDER_COUNT")%></td>
+			%><td><%=rs.getString("DESCRIPTION")%></td>
 			<%
 				
-			%>
-		
-		<tr>
+			%><td><%=rs.getString("ORIGIN")%></td>
+			<tr>
 			<%
 				}
 
@@ -105,8 +108,11 @@
 			}
 			%>
 		
+		
+		
+	
+		
 	</table>
-
 	<script>
 		function click_search() {
 			const price1 = document.getElementById('price1').value;
@@ -119,13 +125,10 @@
 		}
 
 		function redirect_with_get_params(price1, price2, stock1, stock2) {
-			  window.location.href =
-			    'parameter_query4.jsp?price1=' + price1 ??
-			    'none' + '&price2=' + price2 ??
-			    'none' + '&stock1=' + stock1 ??
-			    'none' + '&stock2=' + stock2 ??
-			    'none';
-			}
+			window.location.href = 'parameter_query4.jsp?price1=' + price1
+					+ '&price2=' + price2 + '&stock1=' + stock1 + '&stock2='
+					+ stock2;
+		}
 	</script>
 </body>
 </html>
