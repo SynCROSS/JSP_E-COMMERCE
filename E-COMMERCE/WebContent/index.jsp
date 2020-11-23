@@ -10,7 +10,8 @@
 <body>
 	<%@ include file="page/header.jsp"%>
 	<%@ include file="page/nav.jsp"%>
-	<%String section = request.getParameter("section")!=null?request.getParameter("section"):"";
+	<%String section = request.getParameter("section") != null ? request.getParameter("section") : "";
+	
 	switch(section){
 		case "product_list":
 			%> <%@ include file="section/product_list.jsp"%><%
