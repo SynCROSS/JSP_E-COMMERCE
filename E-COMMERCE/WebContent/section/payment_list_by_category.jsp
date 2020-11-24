@@ -15,7 +15,7 @@
 		Statement stmt = con.createStatement();
 		String query = "SELECT " + " CATEGORY.NAME, " + " SUM(PAYMENT_HISTORY.ORDER_PRICE) AS ORDERED_PRICE, "
 		+ " COUNT(PAYMENT_HISTORY.ORDER_PRICE) AS ORDERED_COUNT " + " FROM "
-		+ " PAYMENT_HISTORY, CATEGORY, PRODUCT " + "WHERE " + "CATEGORY.ID " + "PRODUCT.CATEGORY_ID "
+		+ " PAYMENT_HISTORY, CATEGORY, PRODUCT " + "WHERE " + "CATEGORY.ID = " + "PRODUCT.CATEGORY_ID "
 		+ "AND PRODUCT.ID = PAYMENT_HISTORY.PRODUCT_ID " + "GROUP BY " + "CATEGORY.NAME ";
 		ResultSet rs = stmt.executeQuery(query);
 		while (rs.next()) {
