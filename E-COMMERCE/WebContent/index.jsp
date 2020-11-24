@@ -10,6 +10,7 @@
 <body>
 	<%@ include file="page/header.jsp"%>
 	<%@ include file="page/nav.jsp"%>
+	<section>
 	<%String section = request.getParameter("section") != null ? request.getParameter("section") : "";
 	
 	switch(section){
@@ -34,6 +35,7 @@
 		default:
 			break;
 	}%>
+	</section>
 	<%@ include file="page/footer.jsp"%>
 </body>
 </html>
