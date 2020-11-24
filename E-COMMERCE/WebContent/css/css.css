@@ -6,6 +6,8 @@
 }
 body {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 header {
   text-align: center;
@@ -42,10 +44,8 @@ footer > a {
   font-weight: 700;
   color: #000;
 }
-
 section {
-  display: flex;
-  flex-direction: column;
+  flex: 1;
 }
 footer {
   left: 0;
