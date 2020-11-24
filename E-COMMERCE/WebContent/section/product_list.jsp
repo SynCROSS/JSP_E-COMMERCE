@@ -19,9 +19,15 @@
 		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SMC_USER", "SMC_USER");
 		Statement stmt = con.createStatement();
 
-		String query = "SELECT " + "PRODUCT.ID, CATEGORY.NAME, " + "PRODUCT.PRICE, PRODUCT.PRICE, "
-		+ "PRODUCT.STOCK, PRODUCT.DESCRIPTION, " + "PRODUCT.ORIGIN, PRODUCT.NAME AS PRODUCT_NAME " + "FROM "
-		+ "CATEGORY, PRODUCT " + "WHERE " + "PRODUCT.CATEGORY_ID = CATEGORY.ID";
+		String query = "SELECT " + 
+		"PRODUCT.ID, CATEGORY.NAME, " + 
+		"PRODUCT.PRICE, "+ "PRODUCT.STOCK, "+
+		"PRODUCT.DESCRIPTION, " + 
+		"PRODUCT.ORIGIN, PRODUCT.NAME AS PRODUCT_NAME " + 
+		"FROM "
+		+ "CATEGORY, PRODUCT " + 
+		"WHERE " + 
+		"PRODUCT.CATEGORY_ID = CATEGORY.ID";
 
 		ResultSet rs = stmt.executeQuery(query);
 		while (rs.next()) {
