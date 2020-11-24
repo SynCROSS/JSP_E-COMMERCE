@@ -32,6 +32,9 @@
 		case "product_create":
 			%> <%@ include file="section/product_create.jsp"%><%
 			break;
+		case "category_create":
+			%> <%@ include file="section/category_create.jsp"%><%
+			break;
 		default:
 			break;
 	}%>

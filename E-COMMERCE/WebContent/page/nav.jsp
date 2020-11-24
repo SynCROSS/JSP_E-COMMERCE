@@ -10,6 +10,7 @@
 				판매 목록</a></li>
 		<li><a href="index.jsp?section=payment_list_by_category">카테고리별
 				판매 목록</a></li>
+		<li><a href="index.jsp?section=category_create">카테고리 등록</a></li>
 		<li><a href="index.jsp">홈으로</a></li>
 	</ul>
 </nav>

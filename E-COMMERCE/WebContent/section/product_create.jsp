@@ -4,7 +4,7 @@
 
 <h3>상품 등록</h3>
 <table>
-	<form action="action/action_insert.jsp">
+	<form action="action/product_insert.jsp">
 		<tr>
 			<td>
 				<p>카테고리 ID</p>
